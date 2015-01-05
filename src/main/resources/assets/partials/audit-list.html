@@ -1,0 +1,17 @@
+		<div ng-controller="auditSimpleDetailController">
+			<div ng-repeat="audit in simpleDetails">
+				<h1>{{ audit.controller.name }}</h1>
+				<table class="table table-striped">
+					<thead>
+						<tr><th>Control launch</th><th>Failed</th><th>Success</th></tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="report in audit.reports">
+							<td><a href="#/audit/111/batch/22">{{ report.launchDate | date:'d MMM yyyy @ HH:mm' }}</a></td>
+							<td>{{ report.failures }}</td>
+							<td>{{ report.success }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>	
+		</div>

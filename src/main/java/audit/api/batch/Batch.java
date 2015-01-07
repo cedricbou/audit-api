@@ -1,4 +1,4 @@
-package audit.api;
+package audit.api.batch;
 
 import java.util.List;
 
@@ -7,23 +7,24 @@ import org.joda.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AuditBatch implements Comparable<AuditBatch> {
+public class Batch implements Comparable<Batch> {
 
-	public final String id;
 	public final LocalDateTime date;
-	public final List<AuditBatchEntry> entries;
+	public final List<BatchEntry> entries;
 	
 	@JsonCreator
-	public AuditBatch(
-		@JsonProperty("id") final String id,
+	public Batch(
 		@JsonProperty("date") final LocalDateTime date, 
-		@JsonProperty("entries") final List<AuditBatchEntry> entries) {
+		@JsonProperty("entries") final List<BatchEntry> entries) {
 		this.date = date;
 		this.entries = entries;
-		this.id = id;
+	}
+
+	public BatchWithCode withCode(final BatchCode code) {
+		return new BatchWithCode(this, code);
 	}
 	
-	public int compareTo(AuditBatch o) {
+	public int compareTo(Batch o) {
 		return date.compareTo(o.date);
 	}
 }

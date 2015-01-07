@@ -1,4 +1,4 @@
-package audit.api;
+package audit.api.batch;
 
 import org.joda.time.LocalDateTime;
 
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Optional;
 
-public class AuditBatchEntry {
+public class BatchEntry {
 
 	public static enum ControlStatus {
 		APPROVED, MISSING, DISAPPROVED		
@@ -19,7 +19,7 @@ public class AuditBatchEntry {
 	public final LocalDateTime since;
 	
 	@JsonCreator
-	public AuditBatchEntry(
+	public BatchEntry(
 		@JsonProperty("ref1") final String ref1,
 		@JsonProperty("ref2") final Optional<String> ref2,
 		@JsonProperty("ref3") final Optional<String> ref3,

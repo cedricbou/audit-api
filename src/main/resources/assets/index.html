@@ -230,7 +230,14 @@
 			});
 		}]);
 	
-	var appControllers = angular.module('auditControllers', []);
+	angular.module('auditBatchDetailModule', ['ngResource'])
+	.factory('BatchDetail', ['$resource', function ($resource) {
+		return $resource('/audit/:auditId/batch/:batchId', {}, {
+			query: { method: 'GET' , isArray: false}
+		});
+	}]);
+	
+	var appControllers = angular.module('auditControllers', ['auditBatchDetailModule', 'auditSimpleDetailReportModule']);
 	
 	appControllers.controller('auditSimpleDetailController', ['$scope', '$routeParams', 'SimpleDetailReport',
 	    function($scope, $routeParams, SimpleDetailReport) {
@@ -246,13 +253,16 @@
 		
 	}]);
 
-	appControllers.controller('auditBatchDetailController', ['$scope', '$routeParams',
-	                                                  	    function($scope, $routeParams) {
+	appControllers.controller('auditBatchDetailController', ['$scope', '$routeParams', 'BatchDetail',
+	                                                  	    function($scope, $routeParams, BatchDetail) {
 		
-		$scope.toto = "I'm here!";
+		BatchDetail.query({auditId:$routeParams.auditId,batchId:$routeParams.batchId}, function(data) {
+			$scope.batch = data;
+			console.log(data);
+		});
 	}]);
 	
-	var app = angular.module('auditit', [ 'ngRoute', 'auditSimpleDetailReportModule', 'auditControllers' ]);
+	var app = angular.module('auditit', [ 'ngRoute', 'auditControllers' ]);
 	
 	app.config(['$routeProvider',
 	       function($routeProvider) {

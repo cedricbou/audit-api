@@ -7,20 +7,10 @@
 			<tr><th>At</th><th>Reference</th><th>Status</th></tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>2012</a></td>
-				<td>123456</td>
-				<td>APPROVED</td>
-			</tr>
-			<tr>
-				<td>2012</a></td>
-				<td>123456</td>
-				<td>APPROVED</td>
-			</tr>
-			<tr>
-				<td>2012</a></td>
-				<td>123456</td>
-				<td>APPROVED</td>
+			<tr ng-repeat="entry in batch.entries">
+				<td>{{ entry.date }}</a></td>
+				<td>{{ entry.ref1 }}</td>
+				<td>{{ entry.status }}</td>
 			</tr>
 		</tbody>
 	</table>

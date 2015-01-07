@@ -13,6 +13,7 @@ import javax.servlet.DispatcherType;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 
 import audit.repository.AuditInMemoryRepository;
+import audit.repository.BatchInMemoryRepository;
 import audit.resources.AuditResource;
 
 import com.google.common.collect.ImmutableMap;
@@ -53,7 +54,7 @@ public class AuditApplication extends Application<AuditConfiguration> {
 					"allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD"
 					));
 		
-		final AuditResource controllers = new AuditResource(new AuditInMemoryRepository());
+		final AuditResource controllers = new AuditResource(new AuditInMemoryRepository(), new BatchInMemoryRepository());
 		
 		env.jersey().register(controllers);
 		

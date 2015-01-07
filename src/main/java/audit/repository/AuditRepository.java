@@ -2,19 +2,17 @@ package audit.repository;
 
 import java.util.List;
 
-import audit.api.AuditBatchEntry;
-import audit.api.Audit;
-import audit.api.response.AuditBatchReport;
+import audit.api.audit.Audit;
+import audit.api.audit.AuditCode;
+import audit.api.audit.AuditWithCode;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.base.Optional;
 
 public interface AuditRepository {
 
-	public void declareController(final Audit controller);
+	public void save(final AuditWithCode audit);
 	
-	public void recordBatchEntry(final String controllerId, final String batchId, final AuditBatchEntry entry);
-	
-	public ImmutableList<AuditBatchReport> controlBatchSimpleReport(final String controllerId);
+	public Optional<Audit> find(final AuditCode code);
 
-	public List<Audit> controllers();
+	public List<AuditWithCode> all();
 }
